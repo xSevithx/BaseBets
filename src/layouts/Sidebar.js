@@ -17,19 +17,17 @@ const navigation = [
         href: "/create-bet",
         icon: "bi bi-caret-right-fill",
       },
+      {
+        title: "Mint",
+        href: "/mint",
+        icon: "bi bi-caret-right-fill",
+      },
+      {
+        title: "Staking",
+        href: "/staking",
+        icon: "bi bi-caret-right-fill",
+      },
     ],
-  },
-  {
-    title: "Staking",
-    href: "/staking",
-    icon: "bi bi-plus-circle",
-    subNav: [],
-  },
-  {
-    title: "Mint",
-    href: "/mint",
-    icon: "bi bi-plus-circle",
-    subNav: [],
   },
   {
     title: "Vault",
