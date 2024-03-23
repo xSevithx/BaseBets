@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import {
   Navbar,
   Collapse,
@@ -32,7 +32,7 @@ const Header = () => {
   };
 
 
-  const { web3, contract, currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
+  const { currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
   const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   return (

@@ -262,6 +262,8 @@ const handlePlaceBet = async (betId, optionIndex) => {
   }, [bettingContract, web3, currentAccount]);
 
   console.log('OpenBets deadline', bets);
+  console.log('checkApproval', checkApproval);
+  console.log('placebet', placeBet);
   return (
 <>
     <Row>

@@ -9,7 +9,7 @@ import bg2 from "../assets/images/bg/bg2.jpg";
 import bg3 from "../assets/images/bg/bg3.jpg";
 import bg4 from "../assets/images/bg/bg4.jpg";
 
-import { Button } from "reactstrap";
+//import { Button } from "reactstrap";
 import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path as necessary
 
 
@@ -131,9 +131,9 @@ const PopupExample = ({ shortenAddress }) => {
 
 
 const Starter = () => {
-  const { web3, contract, currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
+  const { currentAccount } = useWeb3(); // Now using the useWeb3 hook
   const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
-
+  console.log('shortenAddress', shortenAddress);
 
   return (
     <div>
