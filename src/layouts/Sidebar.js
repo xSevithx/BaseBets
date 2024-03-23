@@ -23,6 +23,18 @@ const navigation = [
     title: "Mint",
     href: "/mint",
     icon: "bi bi-link",
+    subNav: [
+      {
+        title: "Current Bets",
+        href: "/open-bets/current",
+        icon: "bi bi-caret-right-fill",
+      },
+      {
+        title: "Past Bets",
+        href: "/open-bets/past",
+        icon: "bi bi-caret-right-fill",
+      },
+    ],
   },
 ];
 
