@@ -58,10 +58,11 @@ const Sidebar = () => {
                 <span className="ms-3 d-inline-block">{navi.title}</span>
               </Link>
             </NavItem>
-            <a href="/">Root</a>
+            
           ))}
         </Nav>
       </div>
+      <a href="/">Root</a>
     </div>
   );
 };
