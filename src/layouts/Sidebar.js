@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Nav, NavItem, NavLink, Collapse } from 'reactstrap';
 import { Link, useLocation } from 'react-router-dom';
+
+import '../assets/css/Sidebar.css';
+
 const navigation = [
   {
     title: "Bets",
@@ -76,7 +79,7 @@ const Sidebar = () => {
         <Nav vertical className="sidebarNav">
           {navigation.map((navi, index) => (
             <React.Fragment key={index}>
-              <NavItem className="sidenav-bg">
+              <NavItem className="sidenav-bg nav-item-custom">
                 {/* If the main nav item doesn't have a href, it should toggle sub-menu instead of redirecting */}
                 <NavLink
                   href="#"
@@ -90,7 +93,7 @@ const Sidebar = () => {
               {navi.subNav && navi.subNav.length > 0 && (
                 <Collapse isOpen={isOpen === index}>
                   {navi.subNav.map((subItem, subIndex) => (
-                    <NavItem key={`sub-${subIndex}`} className="ms-4 sidenav-sub-bg">
+                    <NavItem key={`sub-${subIndex}`} className="ms-4 sidenav-sub-bg nav-item-custom">
                       <Link
                         to={subItem.href}
                         className={location.pathname === subItem.href ? "active nav-link" : "nav-link"}
