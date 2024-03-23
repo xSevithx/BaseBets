@@ -54,7 +54,7 @@ const navigation = [
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(null);
-  let location = useLocation();
+  const location = useLocation();
 
   // Toggle for opening and closing sub-menus
   const toggle = (index) => setIsOpen(isOpen === index ? null : index);
@@ -64,13 +64,24 @@ const Sidebar = () => {
     document.getElementById("sidebarArea").classList.remove("showSidebar");
   };
 
+  // Function to determine if the nav item should be active
+  const isActiveNavItem = (navi) => {
+    if (navi.href && location.pathname.startsWith(navi.href)) {
+      return true;
+    }
+    if (navi.subNav) {
+      return navi.subNav.some(subItem => location.pathname === subItem.href);
+    }
+    return false;
+  };
+
   return (
     <div className="bg-dark" id="sidebarArea">
       <div className="d-flex">
         <Button
           color="white"
           className="ms-auto text-white d-lg-none"
-          onClick={closeSidebar} // Updated to call closeSidebar function
+          onClick={closeSidebar}
         >
           <i className="bi bi-x"></i>
         </Button>
@@ -79,12 +90,11 @@ const Sidebar = () => {
         <Nav vertical className="sidebarNav">
           {navigation.map((navi, index) => (
             <React.Fragment key={index}>
-              <NavItem className="sidenav-bg nav-item-custom">
-                {/* If the main nav item doesn't have a href, it should toggle sub-menu instead of redirecting */}
+              <NavItem className={`sidenav-bg nav-item-custom ${isActiveNavItem(navi) ? 'active' : ''}`}>
                 <NavLink
                   href="#"
-                  className={location.pathname.startsWith(navi.href) ? "active nav-link py-3" : "nav-link py-3"}
-                  onClick={navi.href ? closeSidebar : () => toggle(index)}
+                  className={`py-3 ${isActiveNavItem(navi) ? 'active nav-link' : 'nav-link'}`}
+                  onClick={() => toggle(index)}
                 >
                   <i className={navi.icon}></i>
                   <span className="ms-3 d-inline-block">{navi.title}</span>
@@ -96,8 +106,8 @@ const Sidebar = () => {
                     <NavItem key={`sub-${subIndex}`} className="ms-4 sidenav-sub-bg nav-item-custom">
                       <Link
                         to={subItem.href}
-                        className={location.pathname === subItem.href ? "active nav-link" : "nav-link"}
-                        onClick={closeSidebar} // Close the sidebar when a sub-item is clicked
+                        className={`nav-link ${location.pathname === subItem.href ? 'active' : ''}`}
+                        onClick={closeSidebar}
                       >
                         <i className={subItem.icon}></i>
                         <span className="ms-3 d-inline-block">{subItem.title}</span>
