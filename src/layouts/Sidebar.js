@@ -41,6 +41,18 @@ const navigation = [
         title: "Create Vault",
         href: "/",
         icon: "bi bi-caret-right-fill",
+        subNav: [
+          {
+            title: "Create Vault",
+            href: "/",
+            icon: "bi bi-caret-right-fill",
+          },
+          {
+            title: "Manage Vault",
+            href: "/",
+            icon: "bi bi-caret-right-fill",
+          },
+        ],
       },
       {
         title: "Manage Vault",
