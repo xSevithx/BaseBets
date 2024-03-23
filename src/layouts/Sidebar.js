@@ -3,50 +3,50 @@ import { Button, Nav, NavItem, NavLink, Collapse } from 'reactstrap';
 import { Link, useLocation } from 'react-router-dom';
 const navigation = [
   {
-    title: "Open Bets",
-    href: "/open-bets",
+    title: "Bets",
+    href: "",
     icon: "bi bi-box-arrow-in-right",
     subNav: [
       {
-        title: "Current Bets",
-        href: "/open-bets/current",
+        title: "Open Bets",
+        href: "/open-bets",
         icon: "bi bi-caret-right-fill",
       },
       {
-        title: "Past Bets",
-        href: "/open-bets/past",
+        title: "Create Bet",
+        href: "/create-bet",
         icon: "bi bi-caret-right-fill",
       },
     ],
-  },
-  {
-    title: "Create Bet",
-    href: "/create-bet",
-    icon: "bi bi-plus-circle",
-    subNav: [],
   },
   {
     title: "Staking",
     href: "/staking",
-    icon: "bi bi-pie-chart-fill",
-    subNav: [
-      {
-        title: "Stake Now",
-        href: "/staking/stake-now",
-        icon: "bi bi-caret-right-fill",
-      },
-      {
-        title: "History",
-        href: "/staking/history",
-        icon: "bi bi-caret-right-fill",
-      },
-    ],
+    icon: "bi bi-plus-circle",
+    subNav: [],
   },
   {
     title: "Mint",
     href: "/mint",
-    icon: "bi bi-coin",
+    icon: "bi bi-plus-circle",
     subNav: [],
+  },
+  {
+    title: "Vault",
+    href: "",
+    icon: "bi bi-pie-chart-fill",
+    subNav: [
+      {
+        title: "Create Vault",
+        href: "/",
+        icon: "bi bi-caret-right-fill",
+      },
+      {
+        title: "Manage Vault",
+        href: "/",
+        icon: "bi bi-caret-right-fill",
+      },
+    ],
   },
 ];
 
