@@ -1,10 +1,7 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-/****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
-
-/***** Pages ****/
 
 const Starter = lazy(() => import("../views/Starter.js"));
 const Alerts = lazy(() => import("../views/ui/Alerts"));
@@ -18,8 +15,6 @@ const OpenBets = lazy(() => import("../views/ui/OpenBets"));
 const CreateBet = lazy(() => import("../views/ui/CreateBet"));
 const NFTStake = lazy(() => import("../views/ui/Staking"));
 const NFTMint = lazy(() => import("../views/ui/Mint"));
-
-/*****Routes******/
 
 const ThemeRoutes = [
   {
