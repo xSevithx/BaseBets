@@ -9,6 +9,14 @@ import bg2 from "../assets/images/bg/bg2.jpg";
 import bg3 from "../assets/images/bg/bg3.jpg";
 import bg4 from "../assets/images/bg/bg4.jpg";
 
+import { Button } from "reactstrap";
+import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path as necessary
+
+
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+
 const BlogData = [
   {
     image: bg1,
@@ -44,12 +52,92 @@ const BlogData = [
   },
 ];
 
+const PopupExample = ({ shortenAddress }) => {
+  // Define your style variables
+  const fontSize = '12px';
+  const padding = '5px';
+  const backgroundColor = '#ffffff';
+  const borderColor = '#cfcece';
+  
+  // Define inline styles using the variables
+  const modalStyle = {
+    fontSize: fontSize,
+    padding: padding,
+    backgroundColor: backgroundColor,
+    border: `1px solid ${borderColor}`,
+  };
+  
+  const headerStyle = {
+    width: '100%',
+    borderBottom: `1px solid ${borderColor}`,
+    fontSize: '18px',
+    textAlign: 'center',
+    padding: '5px',
+  };
+  
+  const contentStyle = {
+    width: '100%',
+    padding: '10px 5px',
+  };
+  
+  const actionsStyle = {
+    width: '100%',
+    padding: '10px 5px',
+    margin: 'auto',
+    textAlign: 'center',
+  };
+  
+  const closeStyle = {
+    cursor: 'pointer',
+    position: 'absolute',
+    display: 'block',
+    padding: '2px 5px',
+    lineHeight: '20px',
+    right: '-10px',
+    top: '-10px',
+    fontSize: '24px',
+    backgroundColor: backgroundColor,
+    borderRadius: '18px',
+    border: `1px solid ${borderColor}`,
+  };
+
+  return (
+    <Popup trigger={<button className="button"> Open Modal </button>} modal nested>
+      {close => (
+        <div style={modalStyle}>
+          <button style={closeStyle} onClick={close}>
+            &times;
+          </button>
+          <div style={headerStyle}> Modal Title {shortenAddress} </div>
+          <div style={contentStyle}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
+          </div>
+          <div style={actionsStyle}>
+            <button
+              className="button"
+              onClick={() => {
+                console.log('modal closed ');
+                close();
+              }}
+            >
+              close modal
+            </button>
+          </div>
+        </div>
+      )}
+    </Popup>
+  );
+};
+
+
 const Starter = () => {
+  const { web3, contract, currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
+  const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
+
+
   return (
     <div>
-      {/***Top Cards***/}
-
-      {/***Sales & Feed***/}
+      <PopupExample shortenAddress={currentAccount}/>
       <Row>
         <Col sm="6" lg="6" xl="7" xxl="8">
           <SalesChart />

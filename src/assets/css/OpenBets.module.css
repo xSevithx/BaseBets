@@ -1,0 +1,147 @@
+.openBetsContainer {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.betRow:hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+}
+
+.categorySelect {
+  margin-bottom: 20px;
+}
+
+.betCardTitle {
+  color: #333;
+  font-weight: bold;
+}
+
+.claimButton {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.claimButton:hover {
+  background-color: #45a049;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2; /* Lighter shade for odd rows */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #ddd; /* Highlight on hover */
+}
+
+.statusIcon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-size: contain;
+}
+
+.finalized {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.onlygfx.com%2Fwp-content%2Fuploads%2F2018%2F04%2Fcompleted-stamp-3-1024x684.png&f=1&nofb=1&ipt=baeae82d3324228a6913f46a882c7eed7ce9321771824e79ae2d01235aaff77c&ipo=images'); /* Example icon */
+}
+
+.open {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.onlygfx.com%2Fwp-content%2Fuploads%2F2018%2F04%2Fcompleted-stamp-3-1024x684.png&f=1&nofb=1&ipt=baeae82d3324228a6913f46a882c7eed7ce9321771824e79ae2d01235aaff77c&ipo=images'); /* Example icon */
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.button {
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .card {
+      margin: 10px;
+  }
+
+  .table {
+      display: block;
+      overflow-x: auto;
+  }
+}
+.openBetsContainer {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.openBetsContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.betRow:hover {
+  background-color: #eaeaea;
+  transition: background-color 0.3s ease;
+}
+
+.categorySelect {
+  margin-bottom: 20px;
+  border-color: #007bff;
+}
+
+.betCardTitle {
+  color: #333;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.claimButton, .placeBetButton {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.claimButton:hover, .placeBetButton:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+}
+
+.countdownTimer {
+  font-weight: bold;
+  color: #007bff;
+}
+/* OpenBets.module.css */
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.betRow:hover {
+  background-color: #f8f9fa; /* Light grey */
+  cursor: pointer;
+}
+
+.countdownTimer {
+  font-weight: bold;
+  color: #28a745; /* Bootstrap success color */
+}
+
+.countdownTimer.nearingEnd {
+  color: #dc3545; /* Bootstrap danger color */
+}

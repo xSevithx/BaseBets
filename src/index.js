@@ -5,17 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from "react-router-dom";
 import Loader from "./layouts/loader/Loader";
+import { Web3Provider } from './contexts/Web3Context'; // Adjust the import path as necessary
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Web3Provider>
   <Suspense fallback={<Loader />}>
     <HashRouter>
       <App />
     </HashRouter>
   </Suspense>
+  </Web3Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

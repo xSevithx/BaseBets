@@ -16,6 +16,7 @@ import {
 import Logo from "./Logo";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 import user1 from "../assets/images/users/user4.jpg";
+import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path as necessary
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -29,6 +30,11 @@ const Header = () => {
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
+
+
+  const { web3, contract, currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
+  const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
+
   return (
     <Navbar color="white" light expand="md" className="fix-header">
       <div className="d-flex align-items-center">
@@ -64,14 +70,11 @@ const Header = () => {
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <Link to="/starter" className="nav-link">
-              Starter
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/about" className="nav-link">
-              About
-            </Link>
+          {!currentAccount ? (
+              <Button color="success" onClick={connectWalletHandler}>Connect Wallet</Button>
+          ) : (
+              <Button color="info" disabled>{shortenAddress(currentAccount)}</Button>
+            )}
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
