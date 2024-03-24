@@ -8,27 +8,27 @@ const navigation = [
   {
     title: "Bets",
     href: "",
-    icon: "bi bi-box-arrow-in-right",
+    icon: "bi bi-cash-coin",
     subNav: [
       {
         title: "Open Bets",
         href: "/open-bets",
-        icon: "bi bi-caret-right-fill",
+        icon: "bi bi-patch-plus",
       },
       {
         title: "Create Bet",
         href: "/create-bet",
-        icon: "bi bi-caret-right-fill",
+        icon: "bi bi-patch-check",
       },
       {
         title: "Mint",
         href: "/mint",
-        icon: "bi bi-caret-right-fill",
+        icon: "bi bi-puzzle",
       },
       {
         title: "Staking",
         href: "/staking",
-        icon: "bi bi-caret-right-fill",
+        icon: "bi bi-rocket",
       },
     ],
   },
@@ -38,21 +38,14 @@ const navigation = [
     icon: "bi bi-pie-chart-fill",
     subNav: [
       {
+        title: "Home",
+        href: "/deadlock",
+        icon: "",
+      },
+      {
         title: "Create Vault",
-        href: "/",
+        href: "",
         icon: "bi bi-caret-right-fill",
-        subNav: [
-          {
-            title: "Create Vault",
-            href: "/",
-            icon: "bi bi-caret-right-fill",
-          },
-          {
-            title: "Manage Vault",
-            href: "/",
-            icon: "bi bi-caret-right-fill",
-          },
-        ],
       },
       {
         title: "Manage Vault",
