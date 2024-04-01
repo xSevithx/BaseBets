@@ -36,6 +36,7 @@ const Header = () => {
   const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   return (
+    <>
     <Navbar color="white" light expand="md" className="fix-header">
       <div className="d-flex align-items-center">
         <div className="d-lg-block d-none me-5 pe-3">
@@ -109,6 +110,7 @@ const Header = () => {
         </Dropdown>
       </Collapse>
     </Navbar>
+    </>
   );
 };
 

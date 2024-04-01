@@ -1,0 +1,28 @@
+.live-bets-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensure it fills the width of its parent */
+}
+
+.bet-display {
+  border: 2px solid #007bff; /* Example border color */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8f9fa; /* Light background for the bet display */
+  color: #343a40; /* Dark text color for readability */
+  font-weight: bold;
+  text-align: center;
+  animation: wiggle 0.5s; /* Keep the wiggle animation */
+  width: 100%; /* Stretch to the full width of the live-bets-container */
+  max-width: none; /* Remove max-width restriction */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+@keyframes wiggle {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
