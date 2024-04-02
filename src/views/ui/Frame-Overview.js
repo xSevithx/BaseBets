@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useBets } from '../contexts/BetsContext.js';
-import '../assets/css/LiveBets.css';
+import React from 'react';
 
 const FrameOverview = () => {
 
