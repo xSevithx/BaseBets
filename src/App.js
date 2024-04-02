@@ -16,6 +16,7 @@ import CreateBet from './views/ui/CreateBet';
 import NFTStake from './views/ui/Staking';
 import NFTMint from './views/ui/Mint';
 import Deadlock from './views/ui/Deadlock';
+import FrameOverview from './views/ui/Frame-Overview.js';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="staking" element={<NFTStake />} />
           <Route path="mint" element={<NFTMint />} />
           <Route path="deadlock" element={<Deadlock />} />
+          <Route path="frame-overview" element={<FrameOverview />} />
         </Route>
       </Routes>
     </div>
