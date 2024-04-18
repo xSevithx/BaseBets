@@ -37,5 +37,5 @@ const ThemeRoutes = [
     ],
   },
 ];
-
-export default ThemeRoutes;
+//Unused code
+//export default ThemeRoutes;

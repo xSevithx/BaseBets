@@ -17,7 +17,7 @@ import NFTStake from './views/ui/Staking';
 import NFTMint from './views/ui/Mint';
 import Deadlock from './views/ui/Deadlock';
 import FrameOverview from './views/ui/Frame-Overview.js';
-
+import LotteryMain from './views/ui/LotteryMain.js';
 const App = () => {
   return (
     <div className="dark">
@@ -38,6 +38,8 @@ const App = () => {
           <Route path="mint" element={<NFTMint />} />
           <Route path="deadlock" element={<Deadlock />} />
           <Route path="frame-overview" element={<FrameOverview />} />
+          <Route path="buy-tickets" element={<FrameOverview />} />
+          <Route path="lottery" element={<LotteryMain />} />
         </Route>
       </Routes>
     </div>

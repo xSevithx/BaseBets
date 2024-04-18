@@ -15,6 +15,8 @@ import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path 
 
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { toast } from 'react-toastify'; // Assuming you're using react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BlogData = [
@@ -102,6 +104,7 @@ const PopupExample = ({ shortenAddress }) => {
   };
 
   return (
+    <>
     <Popup trigger={<button className="button"> Open Modal </button>} modal nested>
       {close => (
         <div style={modalStyle}>
@@ -116,6 +119,7 @@ const PopupExample = ({ shortenAddress }) => {
             <button
               className="button"
               onClick={() => {
+                toast.success('modal closed ');
                 console.log('modal closed ');
                 close();
               }}
@@ -126,6 +130,7 @@ const PopupExample = ({ shortenAddress }) => {
         </div>
       )}
     </Popup>
+    </>
   );
 };
 

@@ -10,20 +10,22 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Dropdown,
+  //Dropdown,
   Button,
 } from "reactstrap";
-import Logo from "./Logo";
+//import Logo from "./Logo";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
-import user1 from "../assets/images/users/user4.jpg";
+//import user1 from "../assets/images/users/user4.jpg";
 import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path as necessary
+import { ToastContainer} from 'react-toastify'; // Assuming you're using react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  //const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  //const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
@@ -32,16 +34,16 @@ const Header = () => {
   };
 
 
-  const { currentAccount, connectWalletHandler } = useWeb3(); // Now using the useWeb3 hook
+  const { currentAccount, connectWalletHandler, switchNetwork } = useWeb3(); // Now using the useWeb3 hook
   const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   return (
     <>
     <Navbar color="white" light expand="md" className="fix-header">
       <div className="d-flex align-items-center">
-        <div className="d-lg-block d-none me-5 pe-3">
-          <Logo />
-        </div>
+        {/*<div className="d-lg-block d-none me-5 pe-3">
+           <Logo /> 
+        </div>*/}
         <NavbarBrand href="/">
           <LogoWhite className="d-lg-none" />
         </NavbarBrand>
@@ -79,16 +81,20 @@ const Header = () => {
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
-              DD Menu
+              Network
             </DropdownToggle>
             <DropdownMenu end>
-              <DropdownItem>Option 1</DropdownItem>
-              <DropdownItem>Option 2</DropdownItem>
+              <DropdownItem onClick={() => switchNetwork('Base')}>Base</DropdownItem>
               <DropdownItem divider />
-              <DropdownItem>Reset</DropdownItem>
+              <DropdownItem onClick={() => switchNetwork('Degen')}>Degen</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem onClick={() => switchNetwork('BSC')}>BSC</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem onClick={() => switchNetwork('BSCTest')}>BSC Testnet</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
+        {/*
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="transparent">
             <img
@@ -108,8 +114,10 @@ const Header = () => {
             <DropdownItem>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
+          */}
       </Collapse>
     </Navbar>
+    <ToastContainer />
     </>
   );
 };

@@ -48,7 +48,7 @@ const CountdownTimer = ({ deadline }) => {
       </div>
   );
 };
-const OpenBets = () => {
+const BuyTickets = () => {
   const [bets, setBets] = useState([]);
   const { web3, bettingContract, currentAccount, tokenContract } = useWeb3(); // Now using the useWeb3 hook
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -374,4 +374,4 @@ const handlePlaceBet = async (betId, optionIndex) => {
   );
 };
 
-export default OpenBets;
+export default BuyTickets;

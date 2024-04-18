@@ -1,0 +1,102 @@
+/* Styling for the overall card */
+.lottery-card {
+  width: 25rem; /* Fixed width for all cards */
+  border-radius: 18px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* More pronounced shadow */
+  background: linear-gradient(to bottom, #333, #1c1c1e 100%); /* Gradient background */
+  color: white; /* Light text for contrast */
+  overflow: hidden; /* Ensures contained elements like dropdowns do not overflow */
+  transition: transform 0.3s ease-in-out; /* Smooth transform effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f2229;
+  overflow: hidden;
+}
+
+.lottery-card:hover {
+  transform: translateY(-5px); /* Slight raise effect on hover */
+}
+
+/* Header styling */
+.lottery-card .card-header {
+  background-color: rgba(40, 40, 42, 0.85); /* Slightly transparent background */
+  padding: 10px 15px; /* Spacing around content */
+  border-top-left-radius: 18px; /* Rounded top corners */
+  border-top-right-radius: 18px;
+  background-color: rgba(40, 40, 42, 0.85);
+  padding: 10px 15px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+/* Body styling */
+.lottery-card .card-body {
+  background-color: #2a2a2c; /* Dark background for body */
+  padding: 20px; /* More padding for content */
+}
+
+/* Title styling with gradient text */
+.lottery-card .card-title {
+  background: linear-gradient(
+    to right,
+    rgb(118, 230, 80),
+    rgb(249, 214, 73),
+    rgb(240, 142, 53),
+    rgb(236, 81, 87),
+    rgb(255, 24, 189),
+    rgb(26, 75, 255),
+    rgb(98, 216, 249)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+/* Subtitle styling */
+.lottery-card .card-subtitle {
+  color: #ffd700; /* Gold color for emphasis */
+  font-size: 1.2em; /* Slightly larger font size */
+}
+
+/* Dropdown styling for a sleek appearance */
+.dropdown-toggle {
+  background: transparent; /* Transparent background for dropdown button */
+  color: #ffffff; /* White text color */
+  border: none; /* No border */
+  padding: 0.5em 1em; /* Padding for better touch area */
+}
+
+/* Dropdown menu styling for better visibility */
+.dropdown-menu {
+  background-color: #2a2a2c; /* Dark background for dropdown items */
+  border: none; /* Removing default border */
+}
+
+.dropdown-item {
+  color: #c7c7c7; /* Slightly lighter text for items */
+  transition: background-color 0.2s; /* Smooth transition for background color */
+}
+
+.dropdown-item:hover {
+  background-color: #404040; /* Dark grey background for hover */
+}
+
+/* Styling for stats and other information with hover effect */
+.lottery-card .stats {
+  color: #4caf50; /* Green for stats, similar to success color */
+  font-weight: bold; /* Bold for emphasis */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.lottery-card .stats:hover {
+  background-color: rgba(76, 175, 80, 0.2); /* Light hover background */
+}
+
+/* Countdown timer styling for urgency */
+.countdown {
+  color: #e91e63; /* Pink color for urgency */
+  font-weight: bold; /* Bold for visibility */
+  margin-top: 10px; /* Space from top */
+}

@@ -33,24 +33,24 @@ const navigation = [
     ],
   },
   {
-    title: "Vault",
+    title: "Lottery",
     href: "",
-    icon: "bi bi-pie-chart-fill",
+    icon: "bi bi-cash-coin",
     subNav: [
       {
-        title: "Home",
-        href: "/deadlock",
-        icon: "",
+        title: "Lottery",
+        href: "/lottery",
+        icon: "bi bi-patch-plus",
       },
       {
-        title: "Create Vault",
-        href: "",
-        icon: "bi bi-caret-right-fill",
+        title: "Buy Tickets",
+        href: "/buy-tickets",
+        icon: "bi bi-patch-plus",
       },
       {
-        title: "Manage Vault",
-        href: "/",
-        icon: "bi bi-caret-right-fill",
+        title: "Claim Tickets",
+        href: "/claim-tickets",
+        icon: "bi bi-patch-check",
       },
     ],
   },
@@ -124,6 +124,12 @@ const Sidebar = () => {
             </React.Fragment>
           ))}
         </Nav>
+        <div className="p-3 mt-2">
+          <a rel="noreferrer" target='_blank' href="https://warpcast.com/~/channel/blockbets">Warpcast</a>
+        </div>
+        <div className="p-3 mt-2">
+          <a rel="noreferrer" target='_blank' href="https://t.me/BlockBetsOfficial">Telegram</a>
+        </div>
       </div>
     </div>
   );
