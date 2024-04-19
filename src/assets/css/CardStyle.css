@@ -1,16 +1,130 @@
+/* Override toastify styles */
+.Toastify__toast--success {
+  background-color: var(--emerald-green) !important;
+  color: var(--text-dark) !important;
+}
+
+.Toastify__toast--error {
+  background-color: var(--gold) !important;
+  color: var(--dark-blue) !important;
+}
+
+.Toastify__toast--info {
+  background-color: var(--silver) !important;
+  color: var(--text-dark) !important;
+}
+
+.Toastify__toast--warning {
+  background-color: #ffae42 !important;
+  color: var(--text-dark) !important;
+}
+
+.Toastify__toast-body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.Toastify__close-button {
+  color: var(--text-dark) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Base Colors */
+:root {
+  --dark-blue: #243B55;
+  --gold: #FFD700;
+  --emerald-green: #50C878;
+  --silver: #C0C0C0;
+  --text-light: #FFFFFF;
+  --text-dark: #000000;
+}
+
+.navbar {
+  background-color: #1e2a35;
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  /* background-color: var(--dark-blue); */
+  background-image: url("../../../public/image.png") !important;
+
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3 {
+  color: var(--gold);
+}
+
+a, button {
+  /*background-color: var(--text-dark);*/
+  color: var(--emerald-green);
+  transition: background-color 0.3s;
+}
+
+a:hover, button:hover {
+  background-color: var(--gold);
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--silver);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+/* Typography */
+h1 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Styling for the overall card */
 .lottery-card {
   width: 25rem; /* Fixed width for all cards */
   border-radius: 18px; /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* More pronounced shadow */
+  box-shadow: 0 8px 16px rgba(253, 253, 253, 0.6); /* More pronounced shadow */
   background: linear-gradient(to bottom, #333, #1c1c1e 100%); /* Gradient background */
   color: white; /* Light text for contrast */
   overflow: hidden; /* Ensures contained elements like dropdowns do not overflow */
   transition: transform 0.3s ease-in-out; /* Smooth transform effect */
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #1f2229;
+  background: #2a2a2c;
   overflow: hidden;
 }
 
@@ -20,14 +134,15 @@
 
 /* Header styling */
 .lottery-card .card-header {
-  background-color: rgba(40, 40, 42, 0.85); /* Slightly transparent background */
+  /*background-color: rgba(162, 162, 180, 0.85);  */
+  background-color: #FFD700;
   padding: 10px 15px; /* Spacing around content */
   border-top-left-radius: 18px; /* Rounded top corners */
   border-top-right-radius: 18px;
-  background-color: rgba(40, 40, 42, 0.85);
   padding: 10px 15px;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
+  color: #000000;
 }
 
 /* Body styling */
@@ -53,7 +168,27 @@
   font-size: 1.5em;
   text-align: center;
 }
-
+/* Title styling with gradient text */
+.prize-pot {
+  background: linear-gradient(
+    to right,
+    rgb(192, 202, 51),  /* olive green, reminiscent of currency */
+    rgb(212, 175, 55),  /* golden rod for a rich gold feel */
+    rgb(184, 134, 11),  /* dark golden rod for deeper gold */
+    rgb(153, 101, 21),  /* bronze for a touch of treasure */
+    rgb(204, 164, 61),  /* softer gold for balance */
+    rgb(189, 158, 57),  /* muted gold, keeps it warm */
+    rgb(255, 215, 0)    /* bright gold for a highlight */
+  );
+  
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.5em;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
 /* Subtitle styling */
 .lottery-card .card-subtitle {
   color: #ffd700; /* Gold color for emphasis */
@@ -63,24 +198,24 @@
 /* Dropdown styling for a sleek appearance */
 .dropdown-toggle {
   background: transparent; /* Transparent background for dropdown button */
-  color: #ffffff; /* White text color */
+  color: #000000; /* White text color */
   border: none; /* No border */
   padding: 0.5em 1em; /* Padding for better touch area */
 }
 
 /* Dropdown menu styling for better visibility */
 .dropdown-menu {
-  background-color: #2a2a2c; /* Dark background for dropdown items */
+  background-color: #000000; /* Dark background for dropdown items */
   border: none; /* Removing default border */
 }
 
 .dropdown-item {
-  color: #c7c7c7; /* Slightly lighter text for items */
+  color: #000000; /* Slightly lighter text for items */
   transition: background-color 0.2s; /* Smooth transition for background color */
 }
 
 .dropdown-item:hover {
-  background-color: #404040; /* Dark grey background for hover */
+  background-color: #fdd700; /* Dark grey background for hover */
 }
 
 /* Styling for stats and other information with hover effect */

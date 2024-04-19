@@ -117,7 +117,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
       style={{
         width: '25rem'
       }}>
-        <CardHeader>
+        <CardHeader className=''>
           <div className='container '>
             <div className='row '>
               <div className='col-6'>
@@ -162,9 +162,9 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
               </CardSubtitle>
               {lotteryDetails && (
                   <>
-                      <div>End: {lotteryDetails.endTime}<CountdownTimer deadline={Number(deadlineEpoch) * 1000} /></div>
-                      <div style={{color:'green', fontSize:"26px"}}><p>Pool:</p></div>
-                      <div style={{color:'green', fontSize:"45px"}}><p>{lotteryDetails.amountCollectedInCake} {[lotteryDetails.symbol]}</p></div>
+                      <div className='center'>Ends in: <CountdownTimer deadline={Number(deadlineEpoch) * 1000} /></div>
+                      <div className='center prize-pot' style={{color:'green', fontSize:"26px"}}><p>Pot:</p></div>
+                      <div><p className='center prize-pot'>{lotteryDetails.amountCollectedInCake} {[lotteryDetails.symbol]}</p></div>
                   </>
               )}
           </CardBody>

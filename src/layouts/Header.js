@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <>
-    <Navbar color="white" light expand="md" className="fix-header">
+    <Navbar expand="md" className="fix-header">
       <div className="d-flex align-items-center">
         {/*<div className="d-lg-block d-none me-5 pe-3">
            <Logo /> 
@@ -80,7 +80,7 @@ const Header = () => {
             )}
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav>
+            <DropdownToggle caret nav style={{color: "white"}}>
               Network
             </DropdownToggle>
             <DropdownMenu end>
