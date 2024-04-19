@@ -134,7 +134,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem onClick={() => onViewDetails(lotteryDetails, lottery)}>Buy Tickets</DropdownItem>
-                      <DropdownItem onClick={() => onViewHistory(lotteryDetails)}>Claim</DropdownItem>
+                      <DropdownItem onClick={() => onViewHistory(lotteryDetails)}>Details</DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                 </div>
@@ -294,9 +294,9 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
       <ul>
         {claims.map(ticket => (
           <li key={ticket.id}>
-            Ticket #{ticket.number} - Bracket {ticket.winBracket} - Claimed: {ticket.claimed ? 'Yes' : 'No'}
+            Ticket #{ticket.number} - Bracket {ticket.winBracket} - Claimed: {ticket.claimed ? 'Yes' : 'No'} 
             {!ticket.claimed && (
-              <button onClick={() => handleClaim(ticket.id, ticket.winBracket)}>Claim</button>
+              <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => handleClaim(ticket.id, ticket.winBracket)}>Claim</Button>
             )}
           </li>
         ))}
@@ -375,7 +375,7 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
   };
 
   return (
-      <Modal isOpen={isOpen} toggle={toggle}>
+      <Modal isOpen={isOpen} toggle={toggle} className="themed-modal">
           <ModalHeader toggle={toggle}>Lottery Details</ModalHeader>
           <ModalBody>
               <Nav tabs>
@@ -404,10 +404,10 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                               <Input type="number" name="ticketCount" id="ticketCount" min="1" value={ticketCount} onChange={handleTicketCountChange} />
                           </FormGroup>
                           <FormGroup>
-                            <Button color="primary" onClick={buyTickets}>Buy Tickets</Button>
+                            <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={buyTickets}>Buy Tickets</Button>
                           </FormGroup>
                           <FormGroup>
-                            <Button color="secondary" onClick={() => generateRandomTickets(ticketCount)}>Shuffle Numbers</Button>
+                            <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => generateRandomTickets(ticketCount)}>Shuffle Numbers</Button>
                           </FormGroup>
                           <FormGroup check>
                               <Label check>
@@ -542,7 +542,7 @@ const LotteryMain = () => {
 
       {/* History Modal AKA CLAIM Modal */}
       <Modal isOpen={historyModalOpen} toggle={toggleHistoryModal}>
-            <ModalHeader toggle={toggleHistoryModal}>History</ModalHeader>
+            <ModalHeader toggle={toggleHistoryModal}>Details</ModalHeader>
             <ModalBody>
                 {selectedLotteryDetails && (
                     <>

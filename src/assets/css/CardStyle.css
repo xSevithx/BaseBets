@@ -1,21 +1,85 @@
+/* Modal base styling */
+.modal-content {
+  background: #2a2a2c; /* Dark background for the modal content */
+  color: var(--text-light);
+  border-radius: 10px; /* Rounded corners for the modal */
+  border: none; /* Remove default borders */
+}
+
+/* Modal header styling */
+.modal-header {
+  /* background: #1e2a35; */
+  background: #ffcb37; /* Darker shade for the header to differentiate from body */
+  color: #000000; /* Gold color for headings */
+  border-bottom: 1px solid var(--silver); /* Subtle separation from the modal body */
+  border-top-left-radius: 10px; /* Continue rounded corners from modal */
+  border-top-right-radius: 10px;
+}
+
+/* Modal body styling */
+.modal-body {
+  background-color: #333; /* Slightly lighter than the header for contrast */
+  padding: 20px; /* Ample padding for content */
+}
+
+/* Modal footer styling */
+.modal-footer {
+  background: #28282a; /* Consistent with header but optional */
+  border-top: 1px solid var(--silver); /* Define separation from the body */
+  padding: 10px 15px; /* Consistent padding */
+}
+
+/* Close button specific styling */
+.modal-header .close {
+  color: #ffcb37;
+  text-shadow: none; /* Remove default text shadow */
+}
+
+/* Custom buttons inside modal */
+.modal-button {
+  background-color: var(--emerald-green); /* Thematic button color */
+  color: var(--text-dark);
+  border: none; /* Sleek, borderless buttons */
+}
+
+.modal-button:hover {
+  background-color: #ffcb37; /* Change on hover for interactivity */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Override toastify styles */
 .Toastify__toast--success {
-  background-color: var(--emerald-green) !important;
+  background-color: #ffcb37 !important;
   color: var(--text-dark) !important;
 }
 
 .Toastify__toast--error {
-  background-color: var(--gold) !important;
+  background-color: #ffcb37 !important;
   color: var(--dark-blue) !important;
 }
 
 .Toastify__toast--info {
-  background-color: var(--silver) !important;
+  background-color: #ffcb37 !important;
   color: var(--text-dark) !important;
 }
 
 .Toastify__toast--warning {
-  background-color: #ffae42 !important;
+  background-color: #ffcb37 !important;
   color: var(--text-dark) !important;
 }
 
@@ -40,7 +104,7 @@
 /* Base Colors */
 :root {
   --dark-blue: #243B55;
-  --gold: #FFD700;
+  --gold: #ffcb37;
   --emerald-green: #50C878;
   --silver: #C0C0C0;
   --text-light: #FFFFFF;
@@ -48,7 +112,7 @@
 }
 
 .navbar {
-  background-color: #1e2a35;
+  background-color: #35363b;
   color: var(--text-light);
   font-family: 'Poppins', sans-serif;
 }
@@ -56,23 +120,26 @@
 body {
   /* background-color: var(--dark-blue); */
   background-image: url("../../../public/image.png") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   color: var(--text-light);
   font-family: 'Poppins', sans-serif;
 }
 
 h1, h2, h3 {
-  color: var(--gold);
+  color: #ffcb37;
 }
 
 a, button {
   /*background-color: var(--text-dark);*/
-  color: var(--emerald-green);
+  color: #ffcb37;
   transition: background-color 0.3s;
 }
 
 a:hover, button:hover {
-  background-color: var(--gold);
+  background-color: #6d6347;
 }
 
 /* Layout */
@@ -135,7 +202,7 @@ p {
 /* Header styling */
 .lottery-card .card-header {
   /*background-color: rgba(162, 162, 180, 0.85);  */
-  background-color: #FFD700;
+  background-color: #ffcb37;
   padding: 10px 15px; /* Spacing around content */
   border-top-left-radius: 18px; /* Rounded top corners */
   border-top-right-radius: 18px;
@@ -191,7 +258,7 @@ p {
 }
 /* Subtitle styling */
 .lottery-card .card-subtitle {
-  color: #ffd700; /* Gold color for emphasis */
+  color: #ffcb37; /* Gold color for emphasis */
   font-size: 1.2em; /* Slightly larger font size */
 }
 
@@ -215,7 +282,7 @@ p {
 }
 
 .dropdown-item:hover {
-  background-color: #fdd700; /* Dark grey background for hover */
+  background-color: #ffcb37; /* Dark grey background for hover */
 }
 
 /* Styling for stats and other information with hover effect */

@@ -74,13 +74,13 @@ const Header = () => {
         <Nav className="me-auto" navbar>
           <NavItem>
           {!currentAccount ? (
-              <Button color="success" onClick={connectWalletHandler}>Connect Wallet</Button>
+              <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={connectWalletHandler}>Connect Wallet</Button>
           ) : (
-              <Button color="info" disabled>{shortenAddress(currentAccount)}</Button>
+              <Button style={{backgroundColor:"#ffcb37", color:"black"}} disabled>{shortenAddress(currentAccount)}</Button>
             )}
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav style={{color: "white"}}>
+            <DropdownToggle caret nav style={{color: "#ffcb37"}}>
               Network
             </DropdownToggle>
             <DropdownMenu end>
