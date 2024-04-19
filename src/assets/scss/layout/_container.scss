@@ -4,8 +4,13 @@
 
 .contentArea {
   flex-grow: 1;
-  max-width: 1300px;
+  //max-width: 1300px;
   margin: 0 auto;
+  background-image: url("../../../../public/image.png") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000;
 }
 
 .card {
