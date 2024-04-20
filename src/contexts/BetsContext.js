@@ -6,9 +6,7 @@ export const BetsProvider = ({ children }) => {
     const [latestBet, setLatestBet] = useState(null);
 
     useEffect(() => {
-        const ws = new WebSocket('wss://206.189.59.181:8080', {
-            rejectUnauthorized: false // Only for development/testing purposes!
-        });
+        const ws = new WebSocket('wss://206.189.59.181:8080');
 
         ws.onmessage = (event) => {
             if (event.data instanceof Blob) {

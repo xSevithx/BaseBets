@@ -1,11 +1,13 @@
 const WebSocket = require('ws');
 
-const ws = new WebSocket('wss://206.189.59.181:8080');
+const ws = new WebSocket('wss://206.189.59.181:8080', {
+  rejectUnauthorized: false // Only for development/testing purposes!
+});
 
 ws.on('open', function open() {
   const bet = JSON.stringify({
-    user: "Jasper",
-    amount: "$1000 on RED",
+    user: "XYZ",
+    amount: "$1000 on BLACK",
     timestamp: new Date().toISOString() // Include the current timestamp
   });
   
