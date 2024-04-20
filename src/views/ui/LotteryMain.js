@@ -489,7 +489,6 @@ const LotteryMain = () => {
       <Row>
         <Col>
           <div>
-              <h1>Lottery List</h1>
                 <Row>
                   {lotteries.map((lottery, index) => (
                     <Col key={index} sm="4">

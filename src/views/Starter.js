@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import OpenBets from '../views/ui/OpenBets.js'
 import LotteryMain from '../views/ui/LotteryMain.js'
 import "../assets/css/CardStyle.css";
-
+import LiveBets from "../components/LiveBets.js";
 const Starter = () => {
   const { currentAccount } = useWeb3(); // Now using the useWeb3 hook
   const shortenAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -29,6 +29,7 @@ const Starter = () => {
 
   return (
     <div>
+      <LiveBets />
       <LotteryMain />
       <OpenBets />
     </div>
