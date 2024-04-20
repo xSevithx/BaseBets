@@ -28,8 +28,8 @@ const Starter = () => {
 
   return (
     <div>
-      <OpenBets />
       <LotteryMain />
+      <OpenBets />
     </div>
   );
 };

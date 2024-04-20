@@ -238,13 +238,13 @@ p {
 .lottery-card .card-title {
   background: linear-gradient(
     to right,
-    rgb(118, 230, 80),
-    rgb(249, 214, 73),
-    rgb(240, 142, 53),
-    rgb(236, 81, 87),
-    rgb(255, 24, 189),
-    rgb(26, 75, 255),
-    rgb(98, 216, 249)
+    rgb(192, 202, 51),  /* olive green, reminiscent of currency */
+    rgb(212, 175, 55),  /* golden rod for a rich gold feel */
+    rgb(184, 134, 11),  /* dark golden rod for deeper gold */
+    rgb(153, 101, 21),  /* bronze for a touch of treasure */
+    rgb(204, 164, 61),  /* softer gold for balance */
+    rgb(189, 158, 57),  /* muted gold, keeps it warm */
+    rgb(255, 215, 0)    /* bright gold for a highlight */
   );
   -webkit-background-clip: text;
   color: transparent;
