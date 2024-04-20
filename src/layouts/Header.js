@@ -45,7 +45,7 @@ const Header = () => {
            <Logo /> 
         </div>
         <NavbarBrand href="/">
-          <LogoWhite className="d-lg-none" />
+          {/*<Logo className="d-lg-none" />*/}
         </NavbarBrand>
         <Button
           color="primary"
