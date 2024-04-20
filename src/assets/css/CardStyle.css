@@ -118,11 +118,12 @@
 }
 
 body {
-  /* background-color: var(--dark-blue); 
+  background-color: var(--dark-blue); 
   background-image: url("../../../public/image.png") !important;
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: center;*/
+  background-attachment: fixed;
 
   color: var(--text-light);
   font-family: 'Poppins', sans-serif;
@@ -182,7 +183,7 @@ p {
 
 /* Styling for the overall card */
 .lottery-card {
-  width: 25rem; /* Fixed width for all cards */
+  /*width: 25rem;  Fixed width for all cards */
   border-radius: 18px; /* Rounded corners */
   box-shadow: 0 8px 16px rgba(253, 253, 253, 0.6); /* More pronounced shadow */
   background: linear-gradient(to bottom, #333, #1c1c1e 100%); /* Gradient background */
@@ -193,8 +194,23 @@ p {
   justify-content: center;
   background: #2a2a2c;
   overflow: hidden;
+
+  width: 100%; /* Adjust width to 100% for smaller screens */
+  max-width: 25rem; /* Max width remains 25rem */
+  margin: 10px auto; /* Add vertical margin and center align */
+}
+@media (min-width: 576px) { /* Adjust breakpoint as necessary */
+  .lottery-card {
+    width: calc(50% - 20px); /* Two cards per row with some spacing */
+    margin: 10px; /* Consistent spacing around cards */
+  }
 }
 
+@media (min-width: 768px) {
+  .lottery-card {
+    width: calc(33.333% - 20px); /* Three cards per row for larger screens */
+  }
+}
 .lottery-card:hover {
   transform: translateY(-5px); /* Slight raise effect on hover */
 }
@@ -222,13 +238,13 @@ p {
 .lottery-card .card-title {
   background: linear-gradient(
     to right,
-    rgb(192, 202, 51),  /* olive green, reminiscent of currency */
-    rgb(212, 175, 55),  /* golden rod for a rich gold feel */
-    rgb(184, 134, 11),  /* dark golden rod for deeper gold */
-    rgb(153, 101, 21),  /* bronze for a touch of treasure */
-    rgb(204, 164, 61),  /* softer gold for balance */
-    rgb(189, 158, 57),  /* muted gold, keeps it warm */
-    rgb(255, 215, 0)    /* bright gold for a highlight */
+    rgb(118, 230, 80),
+    rgb(249, 214, 73),
+    rgb(240, 142, 53),
+    rgb(236, 81, 87),
+    rgb(255, 24, 189),
+    rgb(26, 75, 255),
+    rgb(98, 216, 249)
   );
   -webkit-background-clip: text;
   color: transparent;
