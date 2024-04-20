@@ -29,7 +29,6 @@ const Starter = () => {
 
   return (
     <div>
-      <LiveBets />
       <LotteryMain />
       <OpenBets />
     </div>
