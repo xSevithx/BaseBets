@@ -10,7 +10,7 @@
   padding: 20px;
   border-radius: 10px;
   background-color: #ffcb37; /* Light background for the bet display */
-  color: #ffffff; /* Dark text color for readability */
+  color: #000000; /* Dark text color for readability */
   font-weight: bold;
   text-align: center;
   animation: wiggle 0.5s; /* Keep the wiggle animation */
