@@ -266,11 +266,12 @@ const handlePlaceBet = async (betId, optionIndex) => {
   console.log('placebet', placeBet);
   return (
 <>
-    <Row style={{color:"#2a2a2c"}}>
+    <LiveBets />
+    <Row style={{color:"#2a2a2c", paddingTop:"1em"}}>
       <Col style={{color:"#2a2a2c"}}>
         <Card style={{color:"#2a2a2c"}} className="modal-content">
           <CardTitle style={{color:"#fffff", backgroundColor:"#2a2a2c"}} tag="h6" className="border-bottom p-3 mb-0">
-            <LiveBets />
+
           </CardTitle>
           <CardBody style={{color:"#fffff"}} className='modal-body'>
             <FormGroup>
