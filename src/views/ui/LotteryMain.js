@@ -286,11 +286,17 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
   return (
     <div>
       <h4>Previous Tickets</h4>
-      <select value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
+      <Input style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}} id="betCategorySelect" name="select" type="select" value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
+        {lotteryIds.map(id => (
+            <option key={id} value={id}>Lottery #{id}</option>
+          ))}
+      </Input>
+      {/*}
+      <select className="btn" value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
         {lotteryIds.map(id => (
           <option key={id} value={id}>Lottery #{id}</option>
         ))}
-      </select>
+      </select>*/}
       <ul>
         {claims.map(ticket => (
           <li key={ticket.id}>
@@ -380,9 +386,10 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
           <ModalBody>
               <Nav tabs>
                   <NavItem>
-                      <NavLink
+                      <NavLink 
                           className={classnames({ active: activeTab === '1' })}
                           onClick={() => { toggleTab('1'); }}
+                          style={{color:"#ffcb37"}}
                       >
                           Generate Tickets
                       </NavLink>
@@ -391,6 +398,7 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                       <NavLink
                           className={classnames({ active: activeTab === '2' })}
                           onClick={() => { toggleTab('2'); }}
+                          style={{color:"#ffcb37"}}
                       >
                           History
                       </NavLink>

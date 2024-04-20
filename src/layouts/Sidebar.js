@@ -6,6 +6,11 @@ import '../assets/css/Sidebar.css';
 
 const navigation = [
   {
+    title: "Home",
+    href: "/",
+    icon: "bi bi-house",
+  },
+  {
     title: "Lottery",
     href: "/lottery",
     icon: "bi bi-cash-coin",

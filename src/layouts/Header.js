@@ -13,7 +13,7 @@ import {
   //Dropdown,
   Button,
 } from "reactstrap";
-//import Logo from "./Logo";
+import Logo from "./Logo";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 //import user1 from "../assets/images/users/user4.jpg";
 import { useWeb3 } from '../contexts/Web3Context.js'; // Adjust the import path as necessary
@@ -41,9 +41,9 @@ const Header = () => {
     <>
     <Navbar expand="md" className="fix-header">
       <div className="d-flex align-items-center">
-        {/*<div className="d-lg-block d-none me-5 pe-3">
+        <div className="d-lg-block d-none me-5 pe-3">
            <Logo /> 
-        </div>*/}
+        </div>
         <NavbarBrand href="/">
           <LogoWhite className="d-lg-none" />
         </NavbarBrand>

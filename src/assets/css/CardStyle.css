@@ -1,3 +1,22 @@
+.nav-link-tab {
+  display: block;
+  color: #2a2a2c;
+  background: none;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    color: #2a2a2c;
+  }
+
+  &.disabled {
+    color: #2a2a2c;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+
 /* General Table Styling */
 .table {
   width: 100%; /* Full width */
@@ -400,7 +419,7 @@ p {
 
 /* Dropdown menu styling for better visibility */
 .dropdown-menu {
-  background-color: #000000; /* Dark background for dropdown items */
+  background-color: #ffcb37; /* Dark background for dropdown items */
   border: none; /* Removing default border */
 }
 
@@ -410,7 +429,8 @@ p {
 }
 
 .dropdown-item:hover {
-  background-color: #ffcb37; /* Dark grey background for hover */
+  background-color: #000000; /* Dark grey background for hover */
+  color: #ffcb37;
 }
 
 /* Styling for stats and other information with hover effect */
