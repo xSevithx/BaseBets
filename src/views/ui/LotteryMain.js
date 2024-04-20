@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import { toast } from 'react-toastify';
 
 import "../../assets/css/CardStyle.css";
-
+import LiveBets from "../../components/LiveBets";
 const CountdownTimer = ({ deadline }) => {
   const calculateTimeLeft = () => {
       // Assuming deadline is already in milliseconds
@@ -486,6 +486,7 @@ const LotteryMain = () => {
 
     return (
       <>
+      <LiveBets />
       <Row>
         <Col>
           <div>
