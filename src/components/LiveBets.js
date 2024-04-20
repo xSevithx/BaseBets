@@ -14,7 +14,7 @@ const LiveBets = () => {
     }, [latestBet]); // Dependency on latestBet ensures effect runs on new bet
 
     return (
-        <div className="live-bets-container">
+        <div style={{color:"#fffff", backgroundColor:"#2a2a2c"}} className="live-bets-container">
             <div
                 key={animationKey} // Apply key here
                 className="bet-display"

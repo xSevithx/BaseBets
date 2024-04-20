@@ -1,3 +1,115 @@
+/* General Table Styling */
+.table {
+  width: 100%; /* Full width */
+  background-color: #2a2a2c; /* Dark theme background */
+  color: var(--text-light); /* Light text for contrast */
+  border-collapse: collapse; /* Ensures borders between cells are merged */
+  margin-bottom: 1rem; /* Spacing below the table */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Hides anything outside the border radius */
+}
+
+/* Table Headers */
+.table th {
+  background-color: #2a2a2c; /* Gold color for headers for emphasis */
+  color: #ffcb37; /* Dark text for readability */
+  padding: 12px 15px; /* Comfortable padding around text */
+  text-align: left; /* Align text to the left */
+  font-weight: bold; /* Make header fonts bold */
+}
+
+/* Table Cells */
+.table td {
+  background-color: #2a2a2c; /* Slightly lighter than table background */
+  padding: 10px 15px; /* Padding within cells */
+  border-top: 1px solid #444; /* Subtle border for separation */
+}
+
+/* Hover effect for rows */
+.table tbody tr:hover {
+  background-color: #2a2a2c; /* Slightly lighter on hover for interactivity */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Allows table to scroll horizontally on small devices */
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-content {
+  background: #2a2a2c;
+  color: var(--text-light);
+  border-radius: 10px;
+}
+
+.modal-header, .modal-footer {
+  background: #ffcb37;
+  color: #000000;
+  padding: 10px 15px;
+}
+
+.modal-body {
+  background-color: #333;
+  padding: 20px;
+}
+
+.modal-header .close {
+  color: #000000;
+}
+
+.modal-button {
+  background-color: var(--emerald-green);
+  color: var(--text-dark);
+}
+
+.modal-button:hover {
+  background-color: #ffcb37;
+}
+@media (max-width: 768px) {
+  .lottery-card, .other-card-class {
+    width: 100%; /* Make cards full width on smaller screens */
+    margin: 10px 0;
+  }
+}
+a, button {
+  color: #ffcb37;
+  transition: background-color 0.3s;
+}
+
+a:hover, button:hover {
+  background-color: #6d6347; /* Adjust as needed */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Modal base styling */
 .modal-content {
   background: #2a2a2c; /* Dark background for the modal content */

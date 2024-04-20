@@ -6,11 +6,11 @@
 }
 
 .bet-display {
-  border: 2px solid #007bff; /* Example border color */
+  border: 2px solid #ffffff; /* Example border color */
   padding: 20px;
   border-radius: 10px;
-  background-color: #f8f9fa; /* Light background for the bet display */
-  color: #343a40; /* Dark text color for readability */
+  background-color: #ffcb37; /* Light background for the bet display */
+  color: #ffffff; /* Dark text color for readability */
   font-weight: bold;
   text-align: center;
   animation: wiggle 0.5s; /* Keep the wiggle animation */

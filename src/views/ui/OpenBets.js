@@ -266,28 +266,27 @@ const handlePlaceBet = async (betId, optionIndex) => {
   console.log('placebet', placeBet);
   return (
 <>
-    <Row>
-      <Col>
-        <Card className={styles.openBetsContainer}>
-          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+    <Row style={{color:"#2a2a2c"}}>
+      <Col style={{color:"#2a2a2c"}}>
+        <Card style={{color:"#2a2a2c"}} className="modal-content">
+          <CardTitle style={{color:"#fffff", backgroundColor:"#2a2a2c"}} tag="h6" className="border-bottom p-3 mb-0">
             <LiveBets />
           </CardTitle>
-          <CardBody>
+          <CardBody style={{color:"#fffff"}} className='modal-body'>
             <FormGroup>
-              <Label for="betCategorySelect">Select Category</Label>
-              <Input id="betCategorySelect" name="select" type="select" onChange={handleCategoryChange}>
+              <Input style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}} id="betCategorySelect" name="select" type="select" onChange={handleCategoryChange}>
                 {categories.map((category, index) => (
                   <option key={index} value={category}>{category}</option>
                 ))}
               </Input>
             </FormGroup>
-            <Table striped>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Deadline</th>
-                  <th>Total Pool (ETH)</th>
+            <Table striped hover className="table">
+              <thead style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>
+                <tr style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>
+                  <th style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>#</th>
+                  <th style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>Name</th>
+                  <th style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>Deadline</th>
+                  <th style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}}>Total Pool (ETH)</th>
                 </tr>
               </thead>
                 <tbody>
@@ -296,9 +295,9 @@ const handlePlaceBet = async (betId, optionIndex) => {
                     .map((bet) => (
                       <tr key={bet.id} onClick={() => handleRowClick(bet.id)} className={styles.betRow}>
                         <th scope="row">{bet.id}</th>
-                        <td>{bet.name}</td>
-                        <td>{bet.isFinalized ? "Yes" : bet.deadline ? <CountdownTimer deadline={Number(bet.deadline) * 1000} /> : "No Deadline"}</td>
-                        <td>{bet.totalPool}</td>
+                        <td style={{color:"#ffcb37"}}>{bet.name}</td>
+                        <td style={{color:"#ffcb37"}}>{bet.isFinalized ? "Yes" : bet.deadline ? <CountdownTimer deadline={Number(bet.deadline) * 1000} /> : "No Deadline"}</td>
+                        <td style={{color:"#ffcb37"}}>{bet.totalPool}</td>
                       </tr>
                   ))}
                 </tbody>
@@ -357,7 +356,7 @@ const handlePlaceBet = async (betId, optionIndex) => {
 
 
 
-<Modal isOpen={isClaimRewardsModalOpen} toggle={() => setIsClaimRewardsModalOpen(!isClaimRewardsModalOpen)}>
+<Modal className="themed-modal" isOpen={isClaimRewardsModalOpen} toggle={() => setIsClaimRewardsModalOpen(!isClaimRewardsModalOpen)}>
     <ModalHeader toggle={() => setIsClaimRewardsModalOpen(!isClaimRewardsModalOpen)}>
         Claim Rewards for {selectedBet?.name}
     </ModalHeader>

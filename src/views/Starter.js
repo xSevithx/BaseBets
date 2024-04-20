@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import OpenBets from '../views/ui/OpenBets.js'
 import LotteryMain from '../views/ui/LotteryMain.js'
+import "../assets/css/CardStyle.css";
 
 const Starter = () => {
   const { currentAccount } = useWeb3(); // Now using the useWeb3 hook
