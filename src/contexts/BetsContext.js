@@ -41,7 +41,8 @@ export const BetsProvider = ({ children }) => {
                 setWsConnection({ connected: false, error: null });
                 // Attempt to reconnect or handle accordingly
                 if (!event.wasClean) {
-                    setTimeout(connectWebSocket, 5000); // Reconnect every 5 seconds if the disconnection was not clean
+                    //setTimeout(connectWebSocket, 5000); // Reconnect every 5 seconds if the disconnection was not clean
+                    console.log("WebSocket disconnected uncleanly");
                 }
             };
         };
