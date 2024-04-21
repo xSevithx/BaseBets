@@ -6,7 +6,6 @@ import LiveBets from "../../components/LiveBets";
 import styles from '../../assets/css/OpenBets.module.css';
 
 const CountdownTimer = ({ deadline }) => {
-  console.log('CountdownTimer deadline', deadline);
   const calculateTimeLeft = () => {
       // Assuming deadline is already in milliseconds
       const difference = deadline - new Date().getTime();

@@ -9,16 +9,17 @@ function generateRandomEthAddress() {
 function getRandomBet() {
   const amount = Math.floor(Math.random() * 1000 + 1); // Random amount between 1 and 1000
   //const color = Math.random() > 0.5 ? 'RED' : 'BLACK'; // Randomly pick RED or BLACK
-  //const color = 'Math.random() > 0.5 ? 'RED' : 'BLACK''; // Randomly pick RED or BLACK
-  return `placed a bet for ${amount}`;
+  return `${amount} bet placed!`;
 }
 
 // Set up a continuous WebSocket connection and message sending every 10 seconds
 setInterval(() => {
-  const ws = new WebSocket('wss://206.189.59.181:8080', {
+  
+  const ws = new WebSocket('wss://api.solina.ai/websocket', {
     rejectUnauthorized: false // Only for development/testing purposes!
   });
-
+  
+  //const ws = new WebSocket('wss://ws.refactor.gg/websocket');
   ws.on('open', function open() {
     const bet = JSON.stringify({
       user: generateRandomEthAddress(),
@@ -36,4 +37,4 @@ setInterval(() => {
   ws.on('error', function error(err) {
     console.error('WebSocket error:', err);
   });
-}, 10000); // 10000 milliseconds = 10 seconds
+}, 1000); // 10000 milliseconds = 10 seconds
