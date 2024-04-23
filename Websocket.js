@@ -15,7 +15,7 @@ function getRandomBet() {
 // Set up a continuous WebSocket connection and message sending every 10 seconds
 setInterval(() => {
   //const ws = new WebSocket('ws://206.189.59.181:8080', {
-  const ws = new WebSocket('ws://ws.refactor.gg:8080/', {
+  const ws = new WebSocket('wss://ws.refactor.gg', {
     rejectUnauthorized: false // Only for development/testing purposes!
   });
   

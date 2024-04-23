@@ -195,6 +195,7 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
         console.log('ids', ids);
         setLotteryIds(ids);
         setSelectedLotteryId(currentId > 1 ? String(currentId - 1) : ''); // pre-select the latest completed lottery
+        
       } catch (error) {
         console.error("Failed to fetch lottery IDs:", error);
       }
@@ -272,14 +273,22 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
     setClaims(updatedTickets);
 };
 
-  const handleClaim = async (ticketId, bracket) => {
+  const handleClaim = async (lottery, ticketId, brackets) => {
+    console.log('handleClaim claims', claims);
+    console.log('handleClaim ticketId', ticketId);
+    console.log('handleClaim lottery', lottery);
+    console.log('handleClaim brackets', brackets);
+    console.log('handleClaim selectedLotteryId', selectedLotteryId);
     try {
-      const contract = new web3.eth.Contract(contractABI, lotteryDetails.address);
-      await contract.methods.claimTickets(selectedLotteryId, [ticketId], [bracket]).send({ from: currentAccount });
+      //const contract = new web3.eth.Contract(contractABI, lotteryDetails.address);
+      console.log('handleClaim lottery', lottery);
+      await lottery.methods.claimTickets(selectedLotteryId, [ticketId], [brackets]).send({ from: currentAccount });
+  
       toast.success("Claim successful!");
-      setClaims(prev => prev.map(ticket => ticket.id === ticketId ? { ...ticket, claimed: true } : ticket));
+      //setClaims(claims => claims.map(ticket => ticket.id === ticketId ? { ...ticket, claimed: true } : ticket));
     } catch (error) {
-      toast.error("Claim failed: " + error.message);
+      toast.error(`Claim failed: ${error.message}`);
+      console.error("Claiming failed:", error);
     }
   };
 
@@ -300,13 +309,19 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
       <ul>
         {claims.map(ticket => (
           <li key={ticket.id}>
-            Ticket #{ticket.number} - Bracket {ticket.winBracket} - Claimed: {ticket.claimed ? 'Yes' : 'No'} 
-            {!ticket.claimed && (
-              <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => handleClaim(ticket.id, ticket.winBracket)}>Claim</Button>
-            )}
+            Ticket #{ticket.number} - Claimed: {ticket.claimed ? 'Yes' : 'No'}
+            {ticket.rewards.map(reward => (
+              <div key={reward.bracket}>
+                Bracket {reward.bracket}: {reward.reward} ETH
+                {!ticket.claimed && (
+                  <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => handleClaim(lottery, ticket.id, [reward.bracket])}>Claim</Button>
+                )}
+              </div>
+            ))}
           </li>
         ))}
       </ul>
+
 
     </div>
   );
@@ -391,7 +406,7 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                           onClick={() => { toggleTab('1'); }}
                           style={{color:"#ffcb37"}}
                       >
-                          Generate Tickets
+                          Buy Tickets
                       </NavLink>
                   </NavItem>
                   <NavItem>
@@ -400,7 +415,7 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                           onClick={() => { toggleTab('2'); }}
                           style={{color:"#ffcb37"}}
                       >
-                          History
+                          Claim
                       </NavLink>
                   </NavItem>
               </Nav>

@@ -47,7 +47,7 @@ export const BetsProvider = ({ children }) => {
             };
         };
 
-        connectWebSocket();
+        //connectWebSocket();
 
         return () => {
             if (ws) {
