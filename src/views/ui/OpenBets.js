@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useWeb3 } from '../../contexts/Web3Context';
 import { Card, Row, Col, CardTitle, CardBody, FormGroup, Label, Input, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import LiveBets from "../../components/LiveBets";
+//import LiveBets from "../../components/LiveBets";
 
 import styles from '../../assets/css/OpenBets.module.css';
 
@@ -265,7 +265,7 @@ const handlePlaceBet = async (betId, optionIndex) => {
   console.log('placebet', placeBet);
   return (
 <>
-    <LiveBets />
+    {/*<LiveBets />*/}
     <Row style={{color:"#2a2a2c", paddingTop:"1em"}}>
       <Col style={{color:"#2a2a2c"}}>
         <Card style={{color:"#2a2a2c"}} className="modal-content">

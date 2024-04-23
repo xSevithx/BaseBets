@@ -14,13 +14,13 @@ function getRandomBet() {
 
 // Set up a continuous WebSocket connection and message sending every 10 seconds
 setInterval(() => {
-  
-  const ws = new WebSocket('wss://api.solina.ai/websocket', {
+  //const ws = new WebSocket('ws://206.189.59.181:8080', {
+  const ws = new WebSocket('ws://ws.refactor.gg:8080/', {
     rejectUnauthorized: false // Only for development/testing purposes!
   });
   
   //const ws = new WebSocket('wss://ws.refactor.gg/websocket');
-  ws.on('open', function open() {
+  ws.on('open', function open() {QW
     const bet = JSON.stringify({
       user: generateRandomEthAddress(),
       amount: getRandomBet(),
