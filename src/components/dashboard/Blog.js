@@ -11,11 +11,12 @@ import {
 const Blog = (props) => {
   return (
     <Card>
-      <CardImg alt="Card image cap" src={props.image} />
+      <CardImg top width="100%" src={props.image} alt="Card image cap" />
       <CardBody className="p-4">
-        <CardTitle tag="h5">{props.title}</CardTitle>
-        <CardSubtitle>{props.subtitle}</CardSubtitle>
-        <CardText className="mt-3">{props.text}</CardText>
+        {/* Apply style prop to text components */}
+        <CardTitle tag="h5" style={props.style}>{props.title}</CardTitle>
+        <CardSubtitle style={props.style}>{props.subtitle}</CardSubtitle>
+        <CardText className="mt-3" style={props.style}>{props.text}</CardText>
         <Button color={props.color}>Read More</Button>
       </CardBody>
     </Card>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Button, Nav, NavItem, NavLink, Collapse } from 'reactstrap';
+import React, { } from 'react';
+import { Button, Nav, NavItem} from 'reactstrap';
 import { Link, useLocation } from 'react-router-dom';
 
 import '../assets/css/Sidebar.css';
-
-const navigation = [
+/*
+let navigation = [
   {
     title: "Home",
     href: "/",
@@ -35,8 +35,30 @@ const navigation = [
     href: "/mint",
     icon: "bi bi-puzzle",
   },
+  {
+    title: "About",
+    href: "/about",
+    icon: "bi bi-question-circle-fill",
+  },
 ];
-
+*/
+let navigation = [
+  {
+    title: "Home",
+    href: "/",
+    icon: "bi bi-house",
+  },
+  {
+    title: "Lottery",
+    href: "/lottery",
+    icon: "bi bi-cash-coin",
+  },
+  {
+    title: "About",
+    href: "/about",
+    icon: "bi bi-question-circle-fill",
+  },
+];
 const Sidebar = () => {
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");

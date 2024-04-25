@@ -85,10 +85,16 @@ const Header = () => {
             </DropdownToggle>
             <DropdownMenu end>
               <DropdownItem onClick={() => switchNetwork('Base')}>Base</DropdownItem>
+
+              {/*
               <DropdownItem divider />
               <DropdownItem onClick={() => switchNetwork('Degen')}>Degen</DropdownItem>
+              */}
+              {/*
               <DropdownItem divider />
               <DropdownItem onClick={() => switchNetwork('BSC')}>BSC</DropdownItem>
+              */}
+
               <DropdownItem divider />
               <DropdownItem onClick={() => switchNetwork('BSCTest')}>BSC Testnet</DropdownItem>
             </DropdownMenu>

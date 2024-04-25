@@ -29,7 +29,7 @@ const chainConfigs = {
     stakingContractAddress: '0x98DB247f0A3b4178FC12f7a4EB09CD86A7702253',
     bettingContractAddress: '0x95a30112Fb19dF691fB9b3f5809103589c998A63',
     deadlockDeployerAddress: '0x9656eb3B9a976B9278b52028AC7A8F129E6250BA',
-    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1', '0x29FCa4889C6f193d0D70472AaDb8F6454044F5d3',],
+    lotteryContractAddresses: ['0x52E6fc742b04a7Cb4FF98096f10132382B0e860b',],
     networkName: 'BSC Testnet',
   },
   '0x2105': { // Base Mainnet

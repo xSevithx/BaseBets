@@ -8,6 +8,7 @@ import Alerts from './views/ui/Alerts';
 import Badges from './views/ui/Badges';
 import Buttons from './views/ui/Buttons';
 import Cards from './views/ui/Cards';
+import About from './views/ui/About';
 import Grid from './views/ui/Grid';
 import Tables from './views/ui/Tables';
 import Forms from './views/ui/Forms';
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="frame-overview" element={<FrameOverview />} />
           <Route path="buy-tickets" element={<FrameOverview />} />
           <Route path="lottery" element={<LotteryMain />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </div>

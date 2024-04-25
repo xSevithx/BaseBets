@@ -61,12 +61,12 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
 
-  console.log('LotteryCard lottery', lottery._address);
+  console.log('LotteryCard lottery', lottery);
   useEffect(() => {
       const fetchLotteryDetails = async () => {
           try {
               const id = await lottery.methods.viewCurrentLotteryId().call();
-              //console.log('id', id.toString());
+              console.log('id', id.toString());
               const details = await lottery.methods.viewLottery(id).call();
               const tokenName = await lottery.methods.name().call();
               const tokenSymbol = await lottery.methods.symbol().call();
@@ -91,6 +91,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
                 symbol: tokenSymbol,
               };
               setLotteryDetails(parsedLottery);
+              console.log('lotteryDetails finalNumber', web3.utils.fromWei(details.finalNumber, 'wei'));
               console.log('lotteryDetails', lotteryDetails);
           } catch (error) {
               console.error("Failed to fetch lottery details:", error);
@@ -101,14 +102,6 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
           fetchLotteryDetails();
       }
   }, [lottery, web3]);
-
-  const handleViewDetails = () => {
-    console.log(`Viewing details for lottery ${index + 1}`);
-  };
-
-  const TESTCLICK = () => {
-    alert('TESTCLICK');
-  };
 
   return (
       <Card className="lottery-card my-3"
@@ -133,7 +126,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
                       Actions
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem onClick={() => onViewDetails(lotteryDetails, lottery)}>Buy Tickets</DropdownItem>
+                      <DropdownItem onClick={() => onViewDetails(lotteryDetails, lottery)}>Tickets</DropdownItem>
                       <DropdownItem onClick={() => onViewHistory(lotteryDetails)}>Details</DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
@@ -172,6 +165,232 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
   );
 };
 
+const HistoryTab = ({ lottery, currentAccount, web3 }) => {
+  const [tickets, setTickets] = useState([]);
+  const [selectedLotteryId, setSelectedLotteryId] = useState('');
+  const [lotteryIds, setLotteryIds] = useState([]);
+  const [winningNumbers, setWinningNumbers] = useState('');
+
+  useEffect(() => {
+      const fetchLotteryIds = async () => {
+          try {
+              const currentId = await lottery.methods.viewCurrentLotteryId().call();
+              const currentIdNumber = currentId.toString();
+              const ids = Array.from({ length: parseInt(currentIdNumber, 10) }, (_, i) => (i + 1).toString());
+              setLotteryIds(ids);
+              setSelectedLotteryId(currentIdNumber > 1 ? currentIdNumber : '');
+          } catch (error) {
+              console.error("Failed to fetch lottery IDs:", error);
+          }
+      };
+      fetchLotteryIds();
+  }, [lottery]);
+
+  useEffect(() => {
+      if (!selectedLotteryId) return;
+      const fetchTicketsAndRewards = async () => {
+          try {
+              const data = await lottery.methods.viewUserInfoForLotteryId(currentAccount, selectedLotteryId, 0, 100).call();
+              const finalNumber = await lottery.methods._lotteries(selectedLotteryId).call();
+              setWinningNumbers(finalNumber.finalNumber.toString());
+              const loadedTickets = data[0].map((id, index) => ({
+                  id,
+                  number: data[1][index].toString(),
+                  claimed: data[2][index],
+                  rewards: []
+              }));
+
+              for (let ticket of loadedTickets) {
+                  ticket.rewards = await Promise.all(
+                      Array.from({ length: 6 }, (_, i) => i).map(async (bracket) => {
+                          const reward = await lottery.methods.viewRewardsForTicketId(selectedLotteryId, ticket.id, bracket).call();
+                          return { bracket, amount: web3.utils.fromWei(reward, 'ether') };
+                      })
+                  );
+              }
+              setTickets(loadedTickets);
+          } catch (error) {
+              console.error("Failed to fetch ticket details:", error);
+          }
+      };
+      fetchTicketsAndRewards();
+  }, [selectedLotteryId, lottery, currentAccount, web3]);
+
+  const handleClaimHighestReward = async (ticketId, rewards) => {
+      const eligibleBrackets = rewards.filter(reward => parseFloat(reward.amount) > 0);
+      if (eligibleBrackets.length === 0) {
+          toast.error("No rewards available to claim.");
+          return;
+      }
+      const highestBracket = eligibleBrackets.reduce((max, reward) => reward.bracket > max.bracket ? reward : max, eligibleBrackets[0]);
+      console.log('handleClaimHighestReward rewards', rewards);
+      console.log('handleClaimHighestReward selectedLotteryId', selectedLotteryId);
+      console.log('handleClaimHighestReward ticketId', ticketId);
+      console.log('handleClaimHighestReward highestBracket', highestBracket);
+      console.log('handleClaimHighestReward highestBracket.bracket', highestBracket.bracket);
+      try {
+          await lottery.methods.claimTickets(selectedLotteryId, [ticketId], [highestBracket.bracket]).send({ from: currentAccount });
+          toast.success("Ticket claimed successfully!");
+          setTickets(tickets.map(ticket => ticket.id === ticketId ? { ...ticket, claimed: true } : ticket));
+      } catch (error) {
+          toast.error(`Claim failed: ${error.message}`);
+          console.error("Claiming failed:", error);
+      }
+  };
+
+  return (
+      <div>
+          <h4>Previous Tickets</h4>
+          <Input type="select" value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
+              {lotteryIds.map(id => <option key={id} value={id}>Lottery #{id}</option>)}
+          </Input>
+          {selectedLotteryId && winningNumbers && (
+            <div>
+                <h5>Winning Numbers for Lottery #{selectedLotteryId}: {winningNumbers}</h5>
+            </div>
+          )}
+          <ul>
+          {tickets.map(ticket => (
+    <li key={ticket.id}>
+        ({ticket.id.toString()})Ticket #{ticket.number}
+        <ul>
+            <li>
+                <span> Rewards: {ticket.rewards.filter(reward => parseFloat(reward.amount) > 0).reduce((max, reward) => max.amount > reward.amount ? max : reward, ticket.rewards[0]).amount} </span>
+                {ticket.claimed ? 'Claimed' : ''}
+                {ticket.claimed === false && ticket.rewards.filter(reward => parseFloat(reward.amount) > 0).length > 0 && (
+                  <>
+                    <Button style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}} onClick={() => handleClaimHighestReward(ticket.id.toString(), ticket.rewards)}>
+                      Claim
+                    </Button>
+                  </>
+                )}
+            </li>
+        </ul>
+    </li>
+))}
+
+
+          </ul>
+      </div>
+  );
+};
+
+
+/*
+const HistoryTab = ({ lottery, currentAccount, web3 }) => {
+  const [tickets, setTickets] = useState([]);
+  const [selectedLotteryId, setSelectedLotteryId] = useState('');
+  const [lotteryIds, setLotteryIds] = useState([]);
+  const [winningNumbers, setWinningNumbers] = useState('');
+
+  // Fetch lottery IDs and ticket details
+  useEffect(() => {
+    const fetchLotteryIds = async () => {
+        try {
+            const currentId = await lottery.methods.viewCurrentLotteryId().call();
+            const currentIdNumber = currentId.toString();
+            const ids = Array.from({ length: parseInt(currentIdNumber, 10) }, (_, i) => (i + 1).toString());
+            setLotteryIds(ids);
+            setSelectedLotteryId(currentIdNumber > 1 ? currentIdNumber : '');
+        } catch (error) {
+            console.error("Failed to fetch lottery IDs:", error);
+        }
+    };
+
+    fetchLotteryIds();
+  }, [lottery]);
+
+  useEffect(() => {
+      if (!selectedLotteryId) return;
+      const fetchTicketsAndRewards = async () => {
+          try {
+              const data = await lottery.methods.viewUserInfoForLotteryId(currentAccount, selectedLotteryId, 0, 100).call();
+              const finalNumber = await lottery.methods._lotteries(selectedLotteryId).call();
+              setWinningNumbers(finalNumber.finalNumber.toString());
+
+              const loadedTickets = data[0].map((id, index) => ({
+                  id,
+                  number: data[1][index].toString(),
+                  claimed: data[2][index],
+                  rewards: []
+              }));
+
+              for (let ticket of loadedTickets) {
+                  ticket.rewards = await Promise.all(
+                      Array.from({ length: 6 }, (_, i) => i).map(async (bracket) => {
+                          const reward = await lottery.methods.viewRewardsForTicketId(selectedLotteryId, ticket.id, bracket).call();
+                          return { bracket, amount: web3.utils.fromWei(reward, 'ether') };
+                      })
+                  );
+              }
+
+              setTickets(loadedTickets);
+          } catch (error) {
+              console.error("Failed to fetch ticket details:", error);
+          }
+      };
+
+      fetchTicketsAndRewards();
+  }, [selectedLotteryId, lottery, currentAccount, web3]);
+
+  const handleClaimAllRewards = async (ticketId, rewards) => {
+      const eligibleBrackets = rewards.filter(reward => parseFloat(reward.amount) > 0).map(reward => reward.bracket);
+      if (eligibleBrackets.length === 0) {
+          toast.error("No rewards available to claim.");
+          return;
+      }
+      console.log('handleClaimAllRewards rewards', rewards);
+      console.log('handleClaimAllRewards selectedLotteryId', selectedLotteryId.toString());
+      console.log('handleClaimAllRewards ticketId', [ticketId]);
+      console.log('handleClaimAllRewards eligibleBrackets', eligibleBrackets);
+      try {
+          await lottery.methods.claimTickets(selectedLotteryId.toString(), [ticketId], eligibleBrackets).send({ from: currentAccount });
+          toast.success("All rewards claimed successfully!");
+          setTickets(tickets.map(ticket => ticket.id === ticketId ? { ...ticket, claimed: true } : ticket));
+      } catch (error) {
+          toast.error(`Claim failed: ${error.message}`);
+          console.error("Claiming failed:", error);
+      }
+  };
+
+  return (
+      <div>
+          <h4>Previous Tickets</h4>
+          <Input type="select" value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
+              {lotteryIds.map(id => <option key={id} value={id}>Lottery #{id}</option>)}
+          </Input>
+          {selectedLotteryId && winningNumbers && (
+                <div>
+                    <h5>Winning Numbers for Lottery #{selectedLotteryId}: {winningNumbers}</h5>
+                </div>
+            )}
+          <ul>
+              {tickets.map(ticket => (
+                  <li key={ticket.id}>
+                      Ticket #{ticket.number} - Claimed: {ticket.claimed ? 'Yes' : 'No'}
+                      {ticket.rewards.filter(reward => parseFloat(reward.amount) > 0).length > 0 && (
+                          <>
+                              <Button style={{color:"#2a2a2c", backgroundColor:"#ffcb37"}} onClick={() => handleClaimAllRewards(ticket.id.toString(), ticket.rewards)}>
+                                  Claim
+                              </Button>
+                              <ul>
+                                <li> 
+                                  <span> Total: {ticket.rewards.filter(reward => parseFloat(reward.amount) > 0).reduce((acc, curr) => acc + parseFloat(curr.amount), 0).toFixed(6)} ETH</span>
+                                </li>
+                              </ul>
+                          </>
+                      )}
+                  </li>
+              ))}
+
+          </ul>
+      </div>
+  );
+};
+*/
+
+/*
+
 const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI }) => {
   const [tickets, setTickets] = useState([]);
   const [claims, setClaims] = useState([]);
@@ -180,6 +399,7 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
   console.log('HistoryTab lottery', lottery);
   console.log('HistoryTab lotteryDetails', lotteryDetails);
   // Fetch available lottery IDs when the component mounts
+  const [winningNumbers, setWinningNumbers] = useState('');
 
   useEffect(() => {
     const fetchLotteryIds = async () => {
@@ -215,6 +435,9 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
         console.log('fetchTickets currentAccount', currentAccount);
         console.log('fetchTickets selectedLotteryId', selectedLotteryId);
         const data = await lottery.methods.viewUserInfoForLotteryId(currentAccount, selectedLotteryId, 0, 100).call();
+        const finalNumber = await lottery.methods._lotteries(selectedLotteryId).call();
+        console.log('fetchTickets finalNumber', finalNumber);
+        setWinningNumbers(finalNumber.finalNumber.toString());
         const [lotteryTicketIds, ticketNumbers, ticketStatuses, end] = [data[0], data[1], data[2], data[3]];
         console.log('fetchTickets data', data);
         console.log('fetchTickets lotteryTicketIds', lotteryTicketIds);
@@ -237,7 +460,20 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
     };
 
     fetchTickets();
+    
   }, [selectedLotteryId, web3, contractABI, currentAccount, lotteryDetails]);
+  
+  useEffect(() => {
+    const fetchClaims = async () => {
+        // Logic to fetch ticket claims, assuming it sets the data correctly formatted
+        const fetchedClaims = await fetchLotteryClaims();
+        setClaims(fetchedClaims.map(claim => ({
+            ...claim,
+            eligibleBrackets: claim.rewards.filter(reward => parseFloat(reward.amount) > 0).map(reward => reward.bracket)
+        })));
+    };
+    fetchClaims();
+}, []);
 
   const checkWinningBrackets = async (loadedTickets) => {
     // Assume 6 brackets from 0 to 5
@@ -254,7 +490,7 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
                         console.log('checkWinningBrackets reward', reward.toString());
                         return {
                             bracket,
-                            reward: web3.utils.fromWei(reward, 'ether'), // Assuming reward is returned in Wei
+                            reward: web3.utils.fromWei(reward, 'wei'), // Assuming reward is returned in Wei
                         };
                     } catch (error) {
                         console.error("Error fetching reward: ", error);
@@ -291,7 +527,22 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
       console.error("Claiming failed:", error);
     }
   };
+  const handleClaimAll = async (ticketId, brackets) => {
+    if (brackets.length === 0) {
+        toast.error("No rewards available to claim.");
+        return;
+    }
 
+    try {
+        await lottery.methods.claimTickets(ticketId, brackets).send({ from: currentAccount });
+        toast.success("All rewards claimed successfully!");
+        // Update UI to reflect the claimed ticket
+        setClaims(claims.map(ticket => ticket.id === ticketId ? { ...ticket, claimed: true } : ticket));
+    } catch (error) {
+        toast.error(`Claim failed: ${error.message}`);
+        console.error("Claiming failed:", error);
+    }
+};
   return (
     <div>
       <h4>Previous Tickets</h4>
@@ -300,33 +551,40 @@ const HistoryTab = ({ lottery, currentAccount, lotteryDetails, web3, contractABI
             <option key={id} value={id}>Lottery #{id}</option>
           ))}
       </Input>
-      {/*}
+      {}
       <select className="btn" value={selectedLotteryId} onChange={(e) => setSelectedLotteryId(e.target.value)}>
         {lotteryIds.map(id => (
           <option key={id} value={id}>Lottery #{id}</option>
         ))}
-      </select>*/}
+      </select>}
       <ul>
+        <ul>
+        {selectedLotteryId && winningNumbers && (
+                <div>
+                    <h5>Winning Numbers for Lottery #{selectedLotteryId}: {winningNumbers}</h5>
+                </div>
+            )}
+        </ul>
         {claims.map(ticket => (
-          <li key={ticket.id}>
-            Ticket #{ticket.number} - Claimed: {ticket.claimed ? 'Yes' : 'No'}
-            {ticket.rewards.map(reward => (
-              <div key={reward.bracket}>
-                Bracket {reward.bracket}: {reward.reward} ETH
-                {!ticket.claimed && (
-                  <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => handleClaim(lottery, ticket.id, [reward.bracket])}>Claim</Button>
-                )}
-              </div>
+                <div key={ticket.id}>
+                    Ticket #{ticket.id} - Claimed: {ticket.claimed ? 'Yes' : 'No'}
+                    <div>Total Rewards: {ticket.eligibleBrackets.length} Brackets</div>
+                    {!ticket.claimed && ticket.eligibleBrackets.length > 0 && (
+                        <Button onClick={() => handleClaimAll(ticket.id, ticket.eligibleBrackets)}>
+                            Claim All Rewards
+                        </Button>
+                    )}
+                </div>
             ))}
-          </li>
-        ))}
+
+
       </ul>
 
 
     </div>
   );
 };
-
+*/
 
 const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lottery, contractABI, id }) => {
   const [activeTab, setActiveTab] = useState('1');
@@ -339,7 +597,23 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
   const toggleTab = tab => {
       if(activeTab !== tab) setActiveTab(tab);
   };
+  // Token approval function
+  const approveToken = async () => {
+    const tokenContractABI = require('../../../src/assets/TokenABI.json');
+    const tokenCount = "1000000000000000000000000000000";  // A large number, written out fully
 
+    const tokenAmount = web3.utils.toWei(tokenCount, 'ether'); // Calculate total tokens needed
+    try {
+      const token = await lottery.methods.cakeToken().call();
+
+      const tokenContractInstance = new web3.eth.Contract(tokenContractABI, token);
+      await tokenContractInstance.methods.approve(lottery._address, tokenAmount).send({ from: currentAccount });
+      toast.success("Approval successful!");
+    } catch (error) {
+      toast.error("Approval failed: " + error.message);
+      console.error("Error approving tokens:", error);
+    }
+  };
   console.log('DetailsModal lotteryDetails', lotteryDetails);
   console.log('DetailsModal id', id);
   console.log('DetailsModal lottery', lottery);
@@ -385,6 +659,14 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
       toast.error("The lottery has already ended. You cannot buy tickets anymore.");
       return;
     }
+
+    // Validate each ticket number
+    const invalidTickets = tickets.filter(ticket => !/^1\d{6}$/.test(ticket));
+    if (invalidTickets.length > 0) {
+        toast.error("Some tickets are invalid. Each ticket number must be 7 digits long and start with '1'.");
+        return;
+    }
+
     try {
       await lottery.methods.buyTickets(id, tickets.map(Number)).send({
         from: currentAccount
@@ -427,6 +709,9 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                               <Input type="number" name="ticketCount" id="ticketCount" min="1" value={ticketCount} onChange={handleTicketCountChange} />
                           </FormGroup>
                           <FormGroup>
+                            <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={approveToken}>Approve Tokens</Button>
+                          </FormGroup>
+                          <FormGroup>
                             <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={buyTickets}>Buy Tickets</Button>
                           </FormGroup>
                           <FormGroup>
@@ -463,8 +748,6 @@ const LotteryMain = () => {
     const { lotteryContractABI, lotteries, web3, lotteryContract, currentAccount } = useWeb3();
     const [detailsModalOpen, setDetailsModalOpen] = useState(false);
     const [historyModalOpen, setHistoryModalOpen] = useState(false);
-    const [ticketNumbers, setTicketNumbers] = useState('');
-    const [numberOfTickets, setNumberOfTickets] = useState(1);
     const [selectedLottery, setSelectedLottery] = useState(null);
     const [selectedLotteryDetails, setSelectedLotteryDetails] = useState(null);
     const [selectedLotteryID, setSelectedLotteryID] = useState(null);
@@ -491,8 +774,6 @@ const LotteryMain = () => {
 
     const toggleDetailsModal = () => setDetailsModalOpen(!detailsModalOpen);
     const toggleHistoryModal = () => setHistoryModalOpen(!historyModalOpen);
-
-    const [activeTab, setActiveTab] = useState('1');
 
   useEffect(() => {
     console.log('lotteries', lotteries);
