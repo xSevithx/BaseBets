@@ -53,11 +53,11 @@ let navigation = [
     href: "/lottery",
     icon: "bi bi-cash-coin",
   },
-  {
+  /*{
     title: "About",
     href: "/about",
     icon: "bi bi-question-circle-fill",
-  },
+  },*/
 ];
 const Sidebar = () => {
   const showMobilemenu = () => {
