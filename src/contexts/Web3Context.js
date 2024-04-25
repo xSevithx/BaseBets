@@ -12,7 +12,7 @@ const chainConfigs = {
     nftContractAddress: '0x7378710302483715B6C56E067aa51FaAf8745325',
     stakingContractAddress: '0x98DB247f0A3b4178FC12f7a4EB09CD86A7702253',
     bettingContractAddress: '0x95a30112Fb19dF691fB9b3f5809103589c998A63',
-    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1', '0x29FCa4889C6f193d0D70472AaDb8F6454044F5d3'],
+    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1'],
     networkName: 'Ethereum Mainnet',
   },
   '0x38': { // BSC Mainnet
@@ -20,7 +20,7 @@ const chainConfigs = {
     nftContractAddress: '0x7378710302483715B6C56E067aa51FaAf8745325',
     stakingContractAddress: '0x98DB247f0A3b4178FC12f7a4EB09CD86A7702253',
     bettingContractAddress: '0x95a30112Fb19dF691fB9b3f5809103589c998A63',
-    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1', '0x29FCa4889C6f193d0D70472AaDb8F6454044F5d3'],
+    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1'],
     networkName: 'BSC Mainnet',
   },
   '0x61': { // BSC Testnet
@@ -38,7 +38,7 @@ const chainConfigs = {
     stakingContractAddress: '0x98DB247f0A3b4178FC12f7a4EB09CD86A7702253',
     bettingContractAddress: '0x95a30112Fb19dF691fB9b3f5809103589c998A63',
     deadlockDeployerAddress: '0x9656eb3B9a976B9278b52028AC7A8F129E6250BA',
-    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1', '0x29FCa4889C6f193d0D70472AaDb8F6454044F5d3'],
+    lotteryContractAddresses: ['0x98B097a6Bc3443C476f45A9C1785fc7C6b2dBAf9'],
     networkName: 'Base Network',
   },
   '0x27BC86AA': { // Degen Mainnet
@@ -47,7 +47,7 @@ const chainConfigs = {
     stakingContractAddress: '0x98DB247f0A3b4178FC12f7a4EB09CD86A7702253',
     bettingContractAddress: '0x95a30112Fb19dF691fB9b3f5809103589c998A63',
     deadlockDeployerAddress: '0x9656eb3B9a976B9278b52028AC7A8F129E6250BA',
-    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1', '0x29FCa4889C6f193d0D70472AaDb8F6454044F5d3'],
+    lotteryContractAddresses: ['0x601337743f3CEF0918e48662598759DCA6c56FA1'],
     networkName: 'Degen Network',
   },
 };
