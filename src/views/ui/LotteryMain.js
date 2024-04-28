@@ -8,6 +8,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import { toast } from 'react-toastify';
+import BigNumber from 'bignumber.js';
 
 import "../../assets/css/CardStyle.css";
 //import LiveBets from "../../components/LiveBets";
@@ -592,6 +593,9 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
   const [tickets, setTickets] = useState([]);
   const [isCustom, setIsCustom] = useState(false);  // New state to control checkbox
 
+  const [totalCost, setTotalCost] = useState(0);
+  const [estimatedPayouts, setEstimatedPayouts] = useState([]);
+
   //const contract = new web3.eth.Contract(contractABI, contractAddress);
 
   const toggleTab = tab => {
@@ -614,6 +618,50 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
       console.error("Error approving tokens:", error);
     }
   };
+
+  const fetchPrizeDistribution = async () => {
+    try {
+      if (!lotteryDetails.id) return; // Ensure there's a lottery ID available
+  
+      const details = await lottery.methods.viewLottery(lotteryDetails.id).call();
+      const prizeDistribution = details.rewardsBreakdown.map(Number); // Convert each to a Number if necessary
+      const currentPot = web3.utils.toWei(lotteryDetails.amountCollectedInCake, 'ether'); // Convert pot to wei if it's in ether
+      calculatePayouts(prizeDistribution, currentPot);
+    } catch (error) {
+      console.error("Failed to fetch prize distribution:", error);
+    }
+  };
+
+  const calculatePayouts = (distribution, pot) => {
+    let payouts = distribution.map((percent, index) => {
+      const percentage = new BigNumber(percent); // Convert to BigNumber
+      const potBN = new BigNumber(pot); // Ensure pot is also a BigNumber
+      const oneHundredThousand = new BigNumber(10000); // BigNumber for 10000 to use in division
+  
+      // Perform BigNumber arithmetic
+      const payout = potBN.multipliedBy(percentage).dividedBy(oneHundredThousand);
+  
+      return {
+        bracket: index + 1,
+        payout: web3.utils.fromWei(payout.toFixed(), 'ether') // Convert the result to ether, assuming pot is in wei
+      };
+    });
+    setEstimatedPayouts(payouts);
+  };
+  
+  
+
+  useEffect(() => {
+    fetchPrizeDistribution();
+  }, [lottery, lotteryDetails]);
+
+
+  useEffect(() => {
+    const ticketPrice = parseFloat(lotteryDetails.priceTicketInCake);
+    setTotalCost((ticketCount * ticketPrice).toFixed(2));
+  }, [ticketCount, lotteryDetails]);
+
+
   console.log('DetailsModal lotteryDetails', lotteryDetails);
   console.log('DetailsModal id', id);
   console.log('DetailsModal lottery', lottery);
@@ -714,6 +762,19 @@ const DetailsModal = ({ currentAccount, isOpen, toggle, lotteryDetails, web3, lo
                           <FormGroup>
                             <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={buyTickets}>Buy Tickets</Button>
                           </FormGroup>
+
+
+                          <FormGroup>
+                        <Label>Total: {totalCost} {lotteryDetails.symbol}</Label>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Estimated Payouts (ESTIMATED):</Label>
+                        {estimatedPayouts.map(payout => (
+                          <div key={payout.bracket}>Bracket {payout.bracket}: {payout.payout} {lotteryDetails.symbol}</div>
+                        ))}
+                    </FormGroup>
+
+
                           <FormGroup>
                             <Button style={{backgroundColor:"#ffcb37", color:"black"}} onClick={() => generateRandomTickets(ticketCount)}>Shuffle Numbers</Button>
                           </FormGroup>
