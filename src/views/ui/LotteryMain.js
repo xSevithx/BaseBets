@@ -61,6 +61,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
   const [deadlineEpoch, setDeadlineEpoch] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
+  const [ticketsSold, setTicketsSold] = useState(0);  // State to hold the number of tickets sold
 
   console.log('LotteryCard lottery', lottery);
   useEffect(() => {
@@ -91,6 +92,19 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
                 name: tokenName,
                 symbol: tokenSymbol,
               };
+
+              const currentTicketId = await lottery.methods.currentTicketId().call(); // Assuming currentTicketId gives the latest ticket id across all lotteries
+              // Calculate the number of tickets sold for the current lottery
+              const ticketsSoldForCurrentLottery = details.firstTicketIdNextLottery
+                ? currentTicketId - details.firstTicketId
+                : currentTicketId - details.firstTicketId + 1; // Adjust calculation depending on whether nextTicketId is available
+              if (ticketsSoldForCurrentLottery <= 0) {
+                setTicketsSold(0);
+              }
+              console.log('ticketsSoldForCurrentLottery', ticketsSoldForCurrentLottery);
+              
+
+              setTicketsSold(ticketsSoldForCurrentLottery.toString());
               setLotteryDetails(parsedLottery);
               console.log('lotteryDetails finalNumber', web3.utils.fromWei(details.finalNumber, 'wei'));
               console.log('lotteryDetails', lotteryDetails);
@@ -150,6 +164,7 @@ const LotteryCard = ({ lottery, index, onViewDetails, onViewHistory }) => {
               {lotteryDetails && (
                 <>
                 <div>Price: {[lotteryDetails.priceTicketInCake ]} {[lotteryDetails.symbol]}</div>
+                <div>Tickets Sold: {ticketsSold}</div>
                 </>
               )}
 
